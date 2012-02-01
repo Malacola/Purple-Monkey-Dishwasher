@@ -7,6 +7,7 @@
 //cipher formula: c(i) = (p(i)+k)%26
         
 bool VerifyArgs(int argc, char *argv[]);
+void Caesar(int key, char plainChar);
 
 int
 main(int argc, char *argv[])
@@ -16,21 +17,34 @@ main(int argc, char *argv[])
         return 1;
     }
     
-    int key = atoi(argv[1]);
-    
+    int key = atoi(argv[1]);    
     printf("The key is... %d\n", key);
-        
-    for (int i = 0; i < argc; i++)
-        printf("%s\n", argv[i]);
-
+    
+    printf("Okay, now gimme a phrase to encrypt...: ");
+    string plainText = GetString();
+    
+    if (strlen(plainText) == 0){
+        do{
+        printf("Did you bump enter by mistake? Try again: ");
+        plainText = GetString();
+        } while (strlen(plainText)== 0);
+    }
+    
+    printf("Encryptings.....\n");
+    printf("%s\n", plainText);
+    for (int i = 0; i < strlen(plainText); i++)
+    {
+        Caesar(key, plainText[i]);
+    }
+    printf("\n");
+    printf("All Done!\n");
 }
 
 bool
 VerifyArgs(int argc, char *argv[])
 {
-    //We want a single argument (two counting the program name)
-    if (argc != 2)
-    {
+    //Check that we have a single argument (ie, two including program name)
+    if (argc != 2){
         printf("Invalid number of arguments! Just give me one number, bra.\n");
         return false;
     }
@@ -44,4 +58,18 @@ VerifyArgs(int argc, char *argv[])
         }
     }
     return true;
+}
+
+void
+Caesar(int key, char plainChar)
+{
+    char cryptoChar;
+    if (islower(plainChar))
+        cryptoChar = ((plainChar - 'a' + key) % 26) + 'a';
+    else if (isupper(plainChar))
+        cryptoChar = ((plainChar - 'A' + key) % 26) + 'A';
+    else 
+        cryptoChar = plainChar;
+        
+    printf("%c", cryptoChar);
 }
