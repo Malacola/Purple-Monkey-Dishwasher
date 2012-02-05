@@ -32,7 +32,7 @@ main(int argc, char *argv[])
     
     printf("Encryptings.....\n");
     printf("%s\n", plainText);
-    int x = strlen(plainText);
+    int x = strlen(plainText);  
     for (int i = 0; i < x; i++)
     {
         Caesar(key, plainText[i]);
