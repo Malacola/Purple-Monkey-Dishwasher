@@ -5,6 +5,7 @@
 #include <string.h>
 
 bool VerifyArgs(int argc, char *argv[]);
+void Vigenere(char key[], char plainText[]);
 
 int
 main(int argc, char *argv[])
@@ -13,6 +14,17 @@ main(int argc, char *argv[])
         printf("Sumfin bad happen.\n");
         return 1;
     }
+    
+    string plainText;
+    do{
+        printf("String to encrypt: ");
+        plainText = GetString();
+    }
+    while (strlen(plainText) <= 0);
+    
+    printf("%s\n", plainText);
+    Vigenere(argv[1], plainText);
+    return 0;
 }
 
 bool
@@ -34,3 +46,36 @@ VerifyArgs(int argc, char *argv[])
     }
     return true;
 }
+
+void
+Vigenere(char key[], char plainText[])
+{
+    int keyElement = 0;
+    int maxKey = strlen(key);
+    int textLength = strlen(plainText);
+    int rotation;
+    
+    for (int i = 0; i < textLength; i++)
+    {
+        keyElement = keyElement % maxKey;
+        
+        if (isupper(key[keyElement]))
+            rotation = (key[keyElement] - 'A');
+        else
+            rotation = (key[keyElement] - 'a');
+
+        if (isupper(plainText[i])){
+            printf("%c", ((plainText[i] - 'A' + rotation) % 26) + 'A');
+            keyElement++;
+        }
+        else if (islower(plainText[i])){
+            printf("%c", ((plainText[i] - 'a' + rotation) % 26) + 'a');
+            keyElement++;
+        }
+        else
+            printf("%c", plainText[i]);      
+    }
+    
+    printf("\n");
+}
+
