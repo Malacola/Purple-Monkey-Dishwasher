@@ -50,10 +50,9 @@ VerifyArgs(int argc, char *argv[])
 void
 Vigenere(char key[], char plainText[])
 {
-    int keyElement = 0;
+    int keyElement, rotation = 0;
     int maxKey = strlen(key);
     int textLength = strlen(plainText);
-    int rotation;
     
     for (int i = 0; i < textLength; i++)
     {
