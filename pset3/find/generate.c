@@ -21,23 +21,25 @@
 int
 main(int argc, char *argv[])
 {
-    // TODO: comment me
+    //generate expects one (optionally two) arguments
     if (argc != 2 && argc != 3)
     {
         printf("Usage: generate n [s]\n");
         return 1;
     }
 
-    // TODO: comment me
+    //convert first argument to an int
     int n = atoi(argv[1]);
 
-    // TODO: comment me
+    /* If the second argument is supplied, set it as our seed;
+     else, use the current time (?) */
     if (argc == 3)
         srand((unsigned int) atoi(argv[2]));
     else
         srand((unsigned int) time(NULL));
 
-    // TODO: comment me
+    /*call rand while i < the first argument; 
+      mod the result by our limit so we don't go over */
     for (int i = 0; i < n; i++)
         printf("%d\n", rand() % LIMIT);
 
