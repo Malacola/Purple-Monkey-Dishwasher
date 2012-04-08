@@ -19,11 +19,22 @@
 
 bool 
 search(int value, int array[], int n)
-{
-    // TODO: re-implement as binary search
-    for (int i = 0; i < n; i++)
-        if (array[i] == value)
+{  
+    int max = n - 1;
+    int min = 0;
+    int mid = 0;
+    
+    while (max >= min)
+    {
+        mid = (min + max) / 2;
+        if (array[mid] < value)
+            min = mid + 1;
+        else if (array[mid] > value)
+            max = mid - 1;
+        else
             return true;
+    }
+    
     return false;
 }
 
@@ -37,8 +48,8 @@ sort(int values[], int n)
 {
     bool swapped = false;
     
-    for (int i = 0; i < n; i++)
-        printf("%d ", values[i]);
+    //for (int i = 0; i < n; i++)
+    //    printf("%d ", values[i]);
     
     printf("\n");
 
@@ -57,8 +68,8 @@ sort(int values[], int n)
             break;
     }
     
-    for (int i = 0; i < n; i++)
-        printf("%d ", values[i]);
+    //for (int i = 0; i < n; i++)
+    //    printf("%d ", values[i]);
         
     return;
 }
